@@ -11,7 +11,7 @@ def extract_title_from_metadata(pdf_path):
             if pdf.is_encrypted:
                 # 尝试用空密码解密
                 pdf.decrypt('')
-            info = pdf.metadata()
+            info = pdf.metadata
             if info:
                 title = info.get('/Title', '')
                 if title:
