@@ -1,17 +1,17 @@
 import os
 import re
-from PyPDF2 import PdfFileReader
+from PyPDF2 import PdfReader
 import fitz  # PyMuPDF
 
 
 def extract_title_from_metadata(pdf_path):
     try:
         with open(pdf_path, 'rb') as f:
-            pdf = PdfFileReader(f)
-            if pdf.isEncrypted:
+            pdf = PdfReader(f)
+            if pdf.is_encrypted:
                 # 尝试用空密码解密
                 pdf.decrypt('')
-            info = pdf.getDocumentInfo()
+            info = pdf.metadata()
             if info:
                 title = info.get('/Title', '')
                 if title:
@@ -190,4 +190,5 @@ if __name__ == "__main__":
                                  "International Journal of Mechanical Sciences", "Swarm and Evolutionary Computation", "computer methods in applied mechanics and engineering",
                                  "Control Engineering Practice", "Ocean Modelling", "Defence Technology", "Physica A", "Sensors", "remote sensing", "Nuclear Engineering and Design",
                                  "Computers Industrial Engineering &"]
+
     main(journal_keywords)
